@@ -1,6 +1,6 @@
 {
   "name": "remail",
-  "version": "0.3.0",
+  "version": "1.0.0-beta.1",
   "description": "Email component framework built with React.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "is-ci || husky install",
     "build": "tsc",
     "test": "tap --ts --no-check-coverage",
     "lint": "prettier --check \"./**/*.{ts,tsx,js,md}\"",
@@ -20,12 +20,14 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
+    "@semantic-release/git": "^9.0.0",
     "@tsconfig/node12": "^1.0.9",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "@types/tap": "^15.0.5",
     "commitlint": "^12.1.4",
     "husky": "^7.0.1",
+    "is-ci": "^3.0.0",
     "prettier": "^2.3.2",
     "react-dom": "^16.14.0",
     "semantic-release": "^17.4.4",
