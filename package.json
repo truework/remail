@@ -10,8 +10,8 @@
     "prepare": "husky install",
     "build": "tsc",
     "test": "tap --ts --no-check-coverage",
-    "lint": "prettier --check \"./**/*.{ts,tsx,md}\"",
-    "format": "prettier --write \"./**/*.{ts,tsx,md}\""
+    "lint": "prettier --check \"./**/*.{ts,tsx,js,md}\"",
+    "format": "prettier --write \"./**/*.{ts,tsx,js,md}\""
   },
   "keywords": [],
   "author": "estrattonbailey",
