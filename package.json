@@ -1,0 +1,29 @@
+{
+  "name": "remail",
+  "version": "0.3.0",
+  "description": "Email component framework built with React.",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "tap --ts --no-check-coverage"
+  },
+  "keywords": [],
+  "author": "estrattonbailey",
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/node12": "^1.0.9",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/tap": "^15.0.5",
+    "react-dom": "^16.14.0",
+    "tap": "^15.0.9",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "react": "^16.14.0"
+  }
+}
