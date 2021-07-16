@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "description": "Email component framework built with React.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
