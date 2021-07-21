@@ -432,6 +432,7 @@ export function Columns({ wrap = false, children, ...props }: ColumnsProps) {
         style={{
           tableLayout: 'auto', // override default of 'fixed'
         }}
+        width='100%' // fill container
       >
         <tr>
           {React.Children.toArray(children).map((child) => {
