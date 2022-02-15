@@ -94,16 +94,16 @@ want, say, 20px of space, we can think `x * 4 = 20` where `x = 5`. So `p={5}` is
 Just like `ThemeProvider` from `styled-components`.
 
 ```jsx
-import { Theme } from '@/lib'
+import { Theme } from "@/lib";
 
 const theme = {
   colors: {
-    primary: '#5B63FE',
+    primary: "#5B63FE",
   },
-}
+};
 
 export function Page() {
-  return <Theme {...theme}>...</Theme>
+  return <Theme {...theme}>...</Theme>;
 }
 ```
 
@@ -118,14 +118,14 @@ Notes:
   `right`
 
 ```jsx
-import { Box } from '@/lib'
+import { Box } from "@/lib";
 
 export function Page() {
   return (
     <Box a="center" c="primary" p={[12, 8]}>
       Centered blue text
     </Box>
-  )
+  );
 }
 ```
 
@@ -141,14 +141,14 @@ Notes:
 - supports some type-specific helpers like `bold`
 
 ```jsx
-import { Type } from '@/lib'
+import { Type } from "@/lib";
 
 export function Page() {
   return (
     <Type bold italic a="center" c="primary">
       Centered blue bold italic text
     </Type>
-  )
+  );
 }
 ```
 
@@ -159,10 +159,17 @@ Only outputs an `img` tag, but will wrap it in an `a` tag if you provide an
 you need more, wrap this in a `Box`.
 
 ```jsx
-import { Img } from '@/lib'
+import { Img } from "@/lib";
 
 export function Page() {
-  return <Img href="https://truework.com" src="/static/image.png" alt="Some Image" w={140} />
+  return (
+    <Img
+      href="https://truework.com"
+      src="/static/image.png"
+      alt="Some Image"
+      w={140}
+    />
+  );
 }
 ```
 
@@ -179,7 +186,7 @@ Notes:
 - `va` translates to `vertical-align` and `valign`
 
 ```jsx
-import { Columns, Column } from '@/lib'
+import { Columns, Column } from "@/lib";
 
 export function Page() {
   return (
@@ -191,7 +198,7 @@ export function Page() {
         50% wide on desktop, 100% wide on mobile
       </Column>
     </Columns>
-  )
+  );
 }
 ```
 
@@ -204,14 +211,14 @@ Again, we've got our own `Buttons` in `@/src/components/Button`, so you probably
 don't need to use this.
 
 ```jsx
-import { Button } from '@/lib'
+import { Button } from "@/lib";
 
 export function Page() {
   return (
     <Button a="center" href="https://truework.com">
       Centered CTA
     </Button>
-  )
+  );
 }
 ```
 
