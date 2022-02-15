@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - beta
+      - alpha
 
 env:
   PNPM_CACHE_FOLDER: .pnpm-store
