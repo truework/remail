@@ -9,8 +9,9 @@
   ],
   "scripts": {
     "prepare": "is-ci || husky install",
-    "build": "esbuild --minify --bundle --external:react --format=cjs --outdir=dist lib/index.ts",
+    "build": "esbuild --minify --bundle --external:react --format=cjs --outdir=dist lib/index.ts && pnpm typegen",
     "test": "c8 node -r esbuild-register lib/__tests__/index.tsx",
+    "typegen": "tsc --emitDeclarationOnly",
     "typecheck": "tsc --noEmit",
     "lint": "prettier --check .",
     "format": "prettier --write ."
