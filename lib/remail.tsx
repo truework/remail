@@ -1,6 +1,5 @@
 import merge from "deepmerge";
 import React from "react";
-import { Properties as CSSProperties } from "csstype";
 
 import { properties as defaultCssProps } from "./properties";
 import { isPxStr } from "./utils";
@@ -9,7 +8,7 @@ import * as presets from "./presets";
 export type AnyKeyValue = Record<string, any>;
 export type Unitless = string | number;
 export type UnitlessKeyValue = Record<string, Unitless>;
-export type CSSPropertyNames = keyof CSSProperties;
+export type CSSPropertyNames = keyof React.CSSProperties;
 export type RemailElementStyleAttributeValue =
   | Unitless[]
   | Unitless

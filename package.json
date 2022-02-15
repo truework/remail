@@ -28,7 +28,6 @@
     "@types/react-dom": "^17.0.9",
     "c8": "^7.11.0",
     "commitlint": "^12.1.4",
-    "csstype": "^3.0.8",
     "esbuild": "^0.14.21",
     "esbuild-register": "^3.3.2",
     "husky": "^7.0.1",
