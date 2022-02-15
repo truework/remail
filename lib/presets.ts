@@ -1,6 +1,6 @@
-import type { Shorthands, Tokens } from "./";
+import type { ThemeShorthands, ThemeTokens } from "./";
 
-export const tokens: Tokens = {
+export const tokens: ThemeTokens = {
   space: [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64],
   fontFamily: {
     sans: "sans-serif",
@@ -24,7 +24,7 @@ export const tokens: Tokens = {
   lineHeight: [1.1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6],
 };
 
-export const shorthands: Shorthands = {
+export const shorthands: ThemeShorthands = {
   d: "display",
   w: "width",
   h: "height",

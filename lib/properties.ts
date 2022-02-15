@@ -1,7 +1,7 @@
-import { Properties } from "./remail";
+import { ThemeProperties } from "./remail";
 import { px, str, percOrPx } from "./utils";
 
-export const properties: Properties = {
+export const properties: ThemeProperties = {
   display: {},
   position: {},
   top: {

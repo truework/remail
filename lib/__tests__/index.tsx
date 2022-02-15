@@ -4,14 +4,14 @@ import React from "react";
 import { renderToStaticMarkup as render } from "react-dom/server";
 
 import {
-  create,
+  createRemail as create,
   createTheme,
   Provider,
   Box,
   Type,
+  Img,
   explode,
   decomposeProps,
-  properties,
   presets,
 } from "../index";
 
@@ -365,6 +365,17 @@ test("Type - custom values", async () => {
   );
   assert.ok(/font-size:3rem/.test(h));
   assert.ok(/color:black/.test(h));
+});
+
+test("Img", async () => {
+  const remail = create();
+  const h = render(
+    <Provider remail={remail}>
+      <Img src="/foo" alt="alt" style={{}} />
+    </Provider>
+  );
+  assert.ok(/src="\/foo"/.test(h));
+  assert.ok(/alt="alt"/.test(h));
 });
 
 test.run();

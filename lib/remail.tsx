@@ -6,48 +6,53 @@ import { properties as defaultCssProps } from "./properties";
 import { isPxStr } from "./utils";
 import * as presets from "./presets";
 
-export type UnknownKeyValue = Record<string, any>;
+export type AnyKeyValue = Record<string, any>;
 export type Unitless = string | number;
 export type UnitlessKeyValue = Record<string, Unitless>;
 export type CSSPropertyNames = keyof CSSProperties;
-export type RemailValue = Unitless[] | Unitless | boolean | undefined;
-export type RemailStyleAttr =
-  | { [property in CSSPropertyNames]?: RemailValue }
-  | { [property: string]: RemailValue };
-export type RemailAttr = UnknownKeyValue & RemailStyleAttr;
+export type RemailElementStyleAttributeValue =
+  | Unitless[]
+  | Unitless
+  | boolean
+  | undefined;
+export type RemailElementStyleAttributes =
+  | { [property in CSSPropertyNames]?: RemailElementStyleAttributeValue }
+  | { [property: string]: RemailElementStyleAttributeValue };
+export type RemailElementAttributes = AnyKeyValue &
+  RemailElementStyleAttributes;
 
 /**
  * Theme
  */
-export type Tokens = {
+export type ThemeTokens = {
   [property in CSSPropertyNames]?: Unitless | Unitless[] | UnitlessKeyValue;
 } & {
   space?: Unitless | Unitless[] | UnitlessKeyValue;
 };
-export type Shorthands = {
+export type ThemeShorthands = {
   [shorthand: string]: CSSPropertyNames | CSSPropertyNames[];
 };
-export type Macros = {
-  [macro: string]: RemailStyleAttr;
+export type ThemeMacros = {
+  [macro: string]: RemailElementStyleAttributes;
 };
-export type Variants = {
+export type ThemeVariants = {
   [variation: string]: {
-    [name: string]: RemailStyleAttr;
+    [name: string]: RemailElementStyleAttributes;
   };
 };
-export type Properties = {
+export type ThemeProperties = {
   [property in CSSPropertyNames]?: {
-    token?: keyof Tokens;
+    token?: keyof ThemeTokens;
     unit?(value: any): string;
   };
 };
 export interface UserTheme {}
 export type Theme = {
-  tokens: Tokens;
-  shorthands: Shorthands;
-  macros: Macros;
-  variants: Variants;
-  properties: Properties;
+  tokens: ThemeTokens;
+  shorthands: ThemeShorthands;
+  macros: ThemeMacros;
+  variants: ThemeVariants;
+  properties: ThemeProperties;
 } & UserTheme;
 
 /**
@@ -63,20 +68,25 @@ export type RemailContext = {
 /**
  * Components
  */
+type PartialHTMLElement<T = HTMLElement> = Partial<
+  Omit<T, "children" | "style">
+>;
 export type AlignmentProps = { a?: "left" | "right" | "center" };
-export type BoxProps = RemailAttr & AlignmentProps;
+export type StyleProps = {
+  style?: { [property in CSSPropertyNames]?: string | number };
+};
+export type BoxProps<T = HTMLTableElement> = RemailElementAttributes &
+  AlignmentProps &
+  StyleProps &
+  PartialHTMLElement<T>;
 export type TypeProps = BoxProps & {
   italic?: boolean;
   bold?: boolean;
 };
-export type ImgProps = RemailAttr &
-  HTMLImageElement & {
-    href?: string;
-  };
-export type ColumnsProps = Omit<BoxProps, "wrap"> & {
-  wrap?: boolean;
-};
-export type ColumnProps = BoxProps;
+export type ImgProps = RemailElementAttributes &
+  StyleProps & { href?: string } & PartialHTMLElement<HTMLImageElement>;
+export type ColumnsProps = BoxProps & { wrap?: boolean };
+export type ColumnProps = BoxProps<HTMLTableDataCellElement>;
 export type ButtonProps = BoxProps & {
   href: string;
   title?: string;
@@ -103,8 +113,11 @@ function toCSS(classname: string, property: string, value: string) {
  *
  * Returns a hypostyle object
  */
-export function explode(props: RemailAttr, theme: Theme): RemailAttr {
-  var attr: RemailAttr = {};
+export function explode(
+  props: RemailElementAttributes,
+  theme: Theme
+): RemailElementAttributes {
+  var attr: RemailElementAttributes = {};
 
   // expand macros and variants, copy other props
   for (var prop in props) {
@@ -149,13 +162,13 @@ export function explode(props: RemailAttr, theme: Theme): RemailAttr {
  * Accepts a style object and converts it to a CSS object intelligible by
  * any CSS-in-JS library that supports objects.
  */
-export function decomposeProps(props: RemailAttr, theme: Theme) {
+export function decomposeProps(props: RemailElementAttributes, theme: Theme) {
   let css = "";
   const classnames: string[] = [];
   const styles: { [property: string]: Unitless } = {};
-  const attributes: UnknownKeyValue = {};
+  const attributes: AnyKeyValue = {};
 
-  const pending: RemailAttr = {};
+  const pending: RemailElementAttributes = {};
 
   // pick out style props vs attributes
   for (const prop of Object.keys(props)) {
@@ -226,7 +239,7 @@ export function createTheme(theme: Partial<Theme> = presets): Theme {
   };
 }
 
-export function create({ theme }: { theme?: Partial<Theme> } = {}) {
+export function createRemail({ theme }: { theme?: Partial<Theme> } = {}) {
   const t = createTheme(theme);
   let css = "";
 
@@ -252,7 +265,7 @@ export const ThemeContext = React.createContext<RemailContext>(
 export function Provider({
   children,
   remail,
-}: React.PropsWithChildren<{ remail: ReturnType<typeof create> }>) {
+}: React.PropsWithChildren<{ remail: ReturnType<typeof createRemail> }>) {
   const context = {
     appendCSS: remail.appendCSS,
   };
@@ -368,7 +381,6 @@ export function Img({
   context.appendCSS(css);
 
   const img = (
-    // @ts-ignore
     <img
       {...attributes}
       className={classnames.join(" ")}
@@ -451,7 +463,6 @@ export function Column({
   context.appendCSS(css);
 
   return (
-    // @ts-ignore
     <td {...attributes} className={classnames.join(" ")} style={styles}>
       {children}
     </td>
