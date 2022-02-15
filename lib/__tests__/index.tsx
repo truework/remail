@@ -236,25 +236,25 @@ test("decomposeProps - width percent", async () => {
   assert.equal(attributes.width, "100%");
 });
 
-test("flushMobileStyles", async () => {
+test("flushCss", async () => {
   const remail = create();
 
   render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Box c={["black", "tomato"]}>Hello</Box>
     </Provider>
   );
 
-  const cssOne = remail.flushMobileStyles();
+  const cssOne = remail.flushCss();
 
   assert.ok(cssOne.includes("tomato"));
 
   render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Box c={["black", "whitesmoke"]}>Hello</Box>
     </Provider>
   );
-  const cssTwo = remail.flushMobileStyles();
+  const cssTwo = remail.flushCss();
 
   assert.not.ok(cssTwo.includes("tomato")); // flushed out already
   assert.ok(cssTwo.includes("whitesmoke"));
@@ -263,7 +263,7 @@ test("flushMobileStyles", async () => {
 test("Box - base", async () => {
   const remail = create();
   const h = render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Box>Hello</Box>
     </Provider>
   );
@@ -274,7 +274,7 @@ test("Box - base", async () => {
 test("Box - a", async () => {
   const remail = create();
   const h = render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Box a="center">Hello</Box>
     </Provider>
   );
@@ -286,14 +286,14 @@ test("Box - a", async () => {
 test("Box - w", async () => {
   const remail = create();
   const h = render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Box w={200}>Hello</Box>
     </Provider>
   );
   assert.ok(/width:200px/.test(h));
   assert.ok(/width="200"/.test(h));
   const h2 = render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Box w="200px">Hello</Box>
     </Provider>
   );
@@ -304,7 +304,7 @@ test("Box - w", async () => {
 test("Box - style", async () => {
   const remail = create();
   const h = render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Box style={{ border: "1px solid black" }}>Hello</Box>
     </Provider>
   );
@@ -315,7 +315,7 @@ test("Box - base", async () => {
   assert.ok(
     /Hello/.test(
       render(
-        <Provider remail={create()}>
+        <Provider value={create()}>
           <Box>Hello</Box>
         </Provider>
       )
@@ -326,7 +326,7 @@ test("Box - base", async () => {
 test("Box - bg", async () => {
   const remail = create();
   const h = render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Box bg="tomato">Hello</Box>
     </Provider>
   );
@@ -337,7 +337,7 @@ test("Box - bg", async () => {
 test("Type", async () => {
   const remail = create();
   const h = render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Type>Hello</Type>
     </Provider>
   );
@@ -357,7 +357,7 @@ test("Type", async () => {
 test("Type - custom values", async () => {
   const remail = create();
   const h = render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Type fs={1} c="black">
         Hello
       </Type>
@@ -370,7 +370,7 @@ test("Type - custom values", async () => {
 test("Img", async () => {
   const remail = create();
   const h = render(
-    <Provider remail={remail}>
+    <Provider value={remail}>
       <Img src="/foo" alt="alt" style={{}} />
     </Provider>
   );

@@ -57,12 +57,7 @@ export type Theme = {
 /**
  * Context
  */
-export type RemailContext = {
-  theme: Theme;
-  context: {
-    appendCSS(value: string): void;
-  };
-};
+export type RemailContext = ReturnType<typeof createRemail>;
 
 /**
  * Components
@@ -246,10 +241,10 @@ export function createRemail({ theme }: { theme?: Partial<Theme> } = {}) {
     get theme() {
       return t;
     },
-    appendCSS(value: string) {
+    addCss(value: string) {
       css += value;
     },
-    flushMobileStyles() {
+    flushCss() {
       const c = css.slice();
       css = "";
       return c;
@@ -263,20 +258,14 @@ export const ThemeContext = React.createContext<RemailContext>(
 
 export function Provider({
   children,
-  remail,
-}: React.PropsWithChildren<{ remail: ReturnType<typeof createRemail> }>) {
-  const context = {
-    appendCSS: remail.appendCSS,
-  };
-
+  value,
+}: React.PropsWithChildren<{ value: RemailContext }>) {
   return (
-    <ThemeContext.Provider value={{ theme: remail.theme, context }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }
 
-export function useRemailContext() {
+export function useRemail() {
   return React.useContext(ThemeContext);
 }
 
@@ -285,21 +274,21 @@ export function Box({
   children,
   ...props
 }: React.PropsWithChildren<BoxProps>) {
-  const { theme, context } = React.useContext(ThemeContext);
+  const remail = useRemail();
 
-  if (!theme) {
+  if (!remail.theme) {
     throw new Error(contextError);
   }
 
   props.w = props.w || (a === "center" ? "auto" : "100%");
 
   const { classnames, attributes, styles, css } = decomposeProps(
-    explode(props, theme),
-    theme
+    explode(props, remail.theme),
+    remail.theme
   );
   const bg = styles.background || "transparent";
 
-  context.appendCSS(css);
+  remail.addCss(css);
 
   return (
     <table
@@ -364,9 +353,9 @@ export function Img({
   href,
   ...props
 }: React.PropsWithChildren<ImgProps>) {
-  const { theme, context } = React.useContext(ThemeContext);
+  const remail = useRemail();
 
-  if (!theme) {
+  if (!remail.theme) {
     throw new Error(contextError);
   }
 
@@ -376,12 +365,12 @@ export function Img({
         h: "auto",
         ...props,
       },
-      theme
+      remail.theme
     ),
-    theme
+    remail.theme
   );
 
-  context.appendCSS(css);
+  remail.addCss(css);
 
   const img = (
     <img
@@ -444,9 +433,9 @@ export function Column({
   children,
   ...props
 }: React.PropsWithChildren<ColumnProps>) {
-  const { theme, context } = React.useContext(ThemeContext);
+  const remail = useRemail();
 
-  if (!theme) {
+  if (!remail.theme) {
     throw new Error(contextError);
   }
 
@@ -458,12 +447,12 @@ export function Column({
         va: "top",
         ...props,
       },
-      theme
+      remail.theme
     ),
-    theme
+    remail.theme
   );
 
-  context.appendCSS(css);
+  remail.addCss(css);
 
   return (
     <td {...attributes} className={classnames.join(" ")} style={styles}>
