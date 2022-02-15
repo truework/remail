@@ -77,8 +77,9 @@ export type TypeProps = BoxProps & {
   italic?: boolean;
   bold?: boolean;
 };
-export type ImgProps = RemailElementAttributes &
-  StyleProps & { href?: string } & PartialHTMLElement<HTMLImageElement>;
+export type ImgProps = Omit<BoxProps<HTMLImageElement>, "a"> & {
+  href?: string;
+};
 export type ColumnsProps = BoxProps & { wrap?: boolean };
 export type ColumnProps = BoxProps<HTMLTableDataCellElement>;
 export type ButtonProps = BoxProps & {

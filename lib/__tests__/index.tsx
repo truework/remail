@@ -371,7 +371,7 @@ test("Img", async () => {
   const remail = create();
   const h = render(
     <Provider value={remail}>
-      <Img src="/foo" alt="alt" style={{}} />
+      <Img src="/foo" alt="alt" style={{}} width="100" />
     </Provider>
   );
   assert.ok(/src="\/foo"/.test(h));
