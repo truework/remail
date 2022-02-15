@@ -276,6 +276,10 @@ export function Provider({
   );
 }
 
+export function useRemailContext() {
+  return React.useContext(ThemeContext);
+}
+
 export function Box({
   a = "left",
   children,
