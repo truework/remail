@@ -99,6 +99,7 @@ function toCSS(classname: string, property: string, value: string) {
     property.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2").toLowerCase() +
     ":" +
     value +
+    " !important" +
     "}"
   );
 }

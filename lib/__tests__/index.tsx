@@ -83,7 +83,7 @@ test("decomposeProps", async () => {
   );
 
   assert.equal(props, {
-    css: "._0{margin-top:8px}",
+    css: "._0{margin-top:8px !important}",
     styles: {
       width: "100%",
       marginTop: "4px",
@@ -247,7 +247,7 @@ test("flushMobileCss", async () => {
 
   const cssOne = remail.flushMobileCss();
 
-  assert.ok(cssOne.includes("tomato"));
+  assert.ok(cssOne.includes("tomato !important"));
   assert.ok(cssOne.includes("@media (max-width: 600px)"));
 
   render(
