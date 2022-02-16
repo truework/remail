@@ -236,19 +236,19 @@ export function createTheme(theme: Partial<Theme> = presets): Theme {
 
 export function createRemail({ theme }: { theme?: Partial<Theme> } = {}) {
   const t = createTheme(theme);
-  let css = "";
+  let css = "@media (max-width: 600px) {";
 
   return {
     get theme() {
       return t;
     },
-    addCss(value: string) {
+    addMobileCss(value: string) {
       css += value;
     },
-    flushCss() {
+    flushMobileCss() {
       const c = css.slice();
       css = "";
-      return c;
+      return c + "}";
     },
   };
 }
@@ -289,7 +289,7 @@ export function Box({
   );
   const bg = styles.background || "transparent";
 
-  remail.addCss(css);
+  remail.addMobileCss(css);
 
   return (
     <table
@@ -371,7 +371,7 @@ export function Img({
     remail.theme
   );
 
-  remail.addCss(css);
+  remail.addMobileCss(css);
 
   const img = (
     <img
@@ -453,7 +453,7 @@ export function Column({
     remail.theme
   );
 
-  remail.addCss(css);
+  remail.addMobileCss(css);
 
   return (
     <td {...attributes} className={classnames.join(" ")} style={styles}>

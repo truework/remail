@@ -236,7 +236,7 @@ test("decomposeProps - width percent", async () => {
   assert.equal(attributes.width, "100%");
 });
 
-test("flushCss", async () => {
+test("flushMobileCss", async () => {
   const remail = create();
 
   render(
@@ -245,16 +245,17 @@ test("flushCss", async () => {
     </Provider>
   );
 
-  const cssOne = remail.flushCss();
+  const cssOne = remail.flushMobileCss();
 
   assert.ok(cssOne.includes("tomato"));
+  assert.ok(cssOne.includes("@media (max-width: 600px)"));
 
   render(
     <Provider value={remail}>
       <Box c={["black", "whitesmoke"]}>Hello</Box>
     </Provider>
   );
-  const cssTwo = remail.flushCss();
+  const cssTwo = remail.flushMobileCss();
 
   assert.not.ok(cssTwo.includes("tomato")); // flushed out already
   assert.ok(cssTwo.includes("whitesmoke"));
