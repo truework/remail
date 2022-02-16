@@ -1,6 +1,6 @@
 {
   "name": "remail",
-  "version": "2.0.0-alpha.7",
+  "version": "2.0.0-alpha.8",
   "description": "Email component framework built with React.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
