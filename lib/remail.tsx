@@ -342,6 +342,7 @@ export function Type({
       textAlign: a as any,
       msoLineHeightRule: "exactly",
       fontStyle: italic ? "italic" : "normal",
+      wordWrap: "break-word", // encourage wrapping of long text in Outlook
       ...style,
     },
     ...props,

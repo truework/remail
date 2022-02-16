@@ -349,6 +349,7 @@ test("Type", async () => {
   assert.ok(/font-style/.test(h));
   assert.ok(/width="100%"/.test(h));
   assert.ok(/width:100%/.test(h));
+  assert.ok(/word-wrap:break-word/.test(h));
 
   // base themed style
   assert.ok(/color:inherit/.test(h));
