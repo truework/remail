@@ -347,7 +347,8 @@ test("Type", async () => {
   assert.ok(/text-align/.test(h));
   assert.ok(/mso-line-height-rule/.test(h));
   assert.ok(/font-style/.test(h));
-  assert.ok(/width/.test(h));
+  assert.ok(/width="100%"/.test(h));
+  assert.ok(/width:100%/.test(h));
 
   // base themed style
   assert.ok(/color:inherit/.test(h));

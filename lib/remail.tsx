@@ -333,6 +333,7 @@ export function Type({
   // default values
   const attr = {
     a,
+    w: "100%", // should be 100% unless overridden by user
     c: "inherit",
     ff: "sans",
     fs: 5,
