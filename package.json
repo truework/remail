@@ -1,6 +1,6 @@
 {
   "name": "remail",
-  "version": "1.0.2",
+  "version": "2.0.0-alpha.11",
   "description": "Email component framework built with React.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,10 +9,12 @@
   ],
   "scripts": {
     "prepare": "is-ci || husky install",
-    "build": "tsc",
-    "test": "tap --ts --no-check-coverage",
-    "lint": "prettier --check \"./**/*.{ts,tsx,js,md}\"",
-    "format": "prettier --write \"./**/*.{ts,tsx,js,md}\""
+    "build": "esbuild --minify --bundle --external:react --format=cjs --outdir=dist lib/index.ts && pnpm typegen",
+    "test": "c8 node -r esbuild-register lib/__tests__/index.tsx",
+    "typegen": "tsc --emitDeclarationOnly",
+    "typecheck": "tsc --noEmit",
+    "lint": "prettier --check .",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "estrattonbailey",
@@ -24,19 +26,24 @@
     "@tsconfig/node12": "^1.0.9",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
-    "@types/tap": "^15.0.5",
+    "c8": "^7.11.0",
     "commitlint": "^12.1.4",
+    "esbuild": "^0.14.21",
+    "esbuild-register": "^3.3.2",
     "husky": "^7.0.1",
     "is-ci": "^3.0.0",
     "prettier": "^2.3.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "semantic-release": "^17.4.4",
-    "tap": "^15.0.9",
     "ts-node": "^10.1.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "uvu": "^0.5.3"
   },
   "peerDependencies": {
     "react": "^16.14.0"
+  },
+  "dependencies": {
+    "deepmerge": "^4.2.2"
   }
 }
