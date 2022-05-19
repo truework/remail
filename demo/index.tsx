@@ -223,5 +223,5 @@ const document = createDocument({
 });
 
 fs.writeFile(path.join(__dirname, "public/index.html"), document, (err) => {
-  console.log("written");
+  console.log("\n  Built public/index.html\n");
 });

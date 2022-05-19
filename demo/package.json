@@ -6,18 +6,16 @@
     "build": "node -r esbuild-register index.tsx",
     "serve": "serve public"
   },
-  "dependencies": {
-    "@types/node": "^17.0.35",
-    "esbuild-register": "^3.3.2",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "remail": "^2.0.0"
-  },
   "devDependencies": {
+    "@types/node": "^17.0.35",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
     "concurrently": "^7.2.0",
+    "esbuild-register": "^3.3.2",
     "nodemon": "^2.0.16",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "remail": "^2.1.0",
     "serve": "^13.0.2",
     "typescript": "^4.6.4"
   }
