@@ -1,6 +1,6 @@
 {
   "extends": "@tsconfig/node12/tsconfig.json",
-  "include": ["./**/*.tsx", "./**/*.ts"],
+  "include": ["./lib/*.tsx", "./lib/*.ts"],
   "compilerOptions": {
     "lib": [
       "dom",
